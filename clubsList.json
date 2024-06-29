@@ -1,1 +1,20 @@
-
+[
+    {
+        "id": 1,
+        "name": "Brandeis University Mock Trials Association",
+        "description": "The Brandeis University Mock Trial Association (BUMTA) is the official, student-run mock trial organization of Brandeis University in Waltham, MA.",
+        "key words": ["Politics", "Legal Studies", "Law"]
+    },
+    {
+        "id": 2,
+        "name": "Robotics Club",
+        "description": "A club for those interested in building robots.",
+        "key words": ["Computer Science", "Robotics", "Technology"]
+    },
+    {
+        "id": 3,
+        "name": "Education for Students by Students",
+        "description": " The mission of ESS is to provide the platform FOR students BY students to develop and share your unique ideas through presentation and conversation.",
+        "key words": ["Education", "Teaching", "Public Speaking"]
+    }
+]
