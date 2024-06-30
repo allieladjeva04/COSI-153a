@@ -15,6 +15,48 @@
         "id": 3,
         "name": "Education for Students by Students",
         "description": " The mission of ESS is to provide the platform FOR students BY students to develop and share your unique ideas through presentation and conversation.",
-        "key words": ["Education", "Teaching", "Public Speaking"]
-    }
+        "key words": ["Education", "Teaching", "Public Speaking", "Activism"]
+    },
+    {
+        "id": 4,
+        "name": "Active Minds",
+        "description": "Through campus-wide events, Brandeis Active Minds aims to remove the stigma that surrounds mental health issues, and create a comfortable environment for an open conversation about mental health issues in our school community.",
+        "key words": ["Politics", "Activism", "Psychology"]
+    },
+    {
+        "id": 5,
+        "name": "Behind the Scenes",
+        "description": "The club members work together to provide theater tech and shop support to the shows happening on campus.",
+        "key words": ["Arts", "Theater", "Peformance", "Drama", "Designing"]
+    },
+    {
+        "id": 6,
+        "name": "Boris' Kitchen Sketch Comedy",
+        "description": "The club members perform student-written sketch comedy, and educate others about writing and performing.",
+        "key words": ["Arts", "Theater", "Peformance", "Drama", "Writing"]
+    },
+    {
+        "id": 7,
+        "name": "Brandeis African Student Organization",
+        "description": "BASO seeks to culturally empower African students and the student body at large to become socially, politically, and critically aware of African Cultures.",
+        "key words": ["Culture", "African culture", "Activism"]
+    },
+    {
+        "id": 8,
+        "name": "Brandeis Ballet Club",
+        "description": "To further educate Brandeis students in the history and development of ballet, train students in the technical aspects of ballet, and raise awareness of dance as an art.",
+        "key words": ["Dancing", "Arts", "Performance"]
+    },
+    {
+        "id": 9,
+        "name": "Brandeis Mixed Martial Arts",
+        "description": "BMMA will instruct on basic and advanced approaches to martial arts, self defense, and combat sports.",
+        "key words": ["Sports", "Fitness"]
+    },
+    {
+        "id": 10,
+        "name": "Brandeis Pole Dance and Fitness",
+        "description": "Brandeis Pole Dance & Fitness club aims to promote both mental and physical health and fitness through careful instruction of techniques in stretching, plyometrics, isometrics, and Aerial Pole Dance.",
+        "key words": ["Sports", "Fitness", "Dancing"]
+    },
 ]
