@@ -10,11 +10,13 @@ function AboutScreen({ navigation }) {
       <Text style={styles.boldText}>2. Enter your major and interest/s and click 'submit'.</Text>
       <Text style={styles.boldText}>3. You will get a list of all the clubs/organizations that you might love!</Text>
       <Text style={styles.boldText}>4. Have fun!!</Text>
+      <View style={styles.buttonBox}>
       <Button
         title="Log In/Sign up"
         onPress={() => navigation.navigate('Your Info')}
-        color={theme.colors.primary} 
+        color='darkblue'
       />
+      </View>
     </View>
   );
 }
@@ -39,6 +41,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: theme.colors.text, 
     padding: 7,
+  },
+  buttonBox: {
+    marginVertical: 10,
+    padding: 10,
+    borderWidth: 1,
+    backgroundColor: 'crimson',
   },
 });
 

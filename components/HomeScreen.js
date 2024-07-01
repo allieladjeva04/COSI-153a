@@ -1,16 +1,18 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button, Image } from 'react-native';
+import { Text, View, StyleSheet, Button, Image, ScrollView } from 'react-native';
 import { useValue } from './ValueContext';
-import theme from './Theme'; 
+import theme from './Theme';
 
 function HomeScreen({ navigation }) {
   const { currentUsername = '', currentMajor = '', joinedClubs = [], clearData } = useValue();
+  
   const renderJoinedClubs = () => {
     if (joinedClubs.length === 0) return null;
     return joinedClubs.join(', ');
   };
+  
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.scrollView} contentContainerStyle={styles.container}>
       <Text style={styles.boldText}>Welcome to MyDeisCommunity!</Text>
       <Image
         source={{ uri: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/32/Brandeis_University_seal.svg/640px-Brandeis_University_seal.svg.png' }}
@@ -23,36 +25,45 @@ function HomeScreen({ navigation }) {
         Just as Mickey Mouse has Toodles, now you have MyDeisCommunity in your pocket!
         The app will help you to find clubs and organizations on campus that match your major/s and passions! :))
       </Text>
+      <View style={styles.buttonBox}>
       <Button
         title="How to use MyDeisCommunity"
         onPress={() => navigation.navigate('About')}
-        color={theme.colors.primary}
+        color='darkblue'
       />
+         </View>
+      <View style={styles.buttonBox}>
       <Button
         title="Log In/Sign up"
         onPress={() => navigation.navigate('Your Info')}
-        color={theme.colors.primary}
+        color='darkblue'
       />
+      </View>
       <Text style={styles.italicText}>Username: {currentUsername}</Text>
       <Text style={styles.italicText}>Major: {currentMajor}</Text>
       {joinedClubs.length > 0 && (
         <Text style={styles.italicText}>Joined Clubs: {renderJoinedClubs()}</Text>
       )}
-       <Button
+      <View style={styles.buttonBox}>
+      <Button
         title="Clear Data"
         onPress={clearData}
-        color={theme.colors.primary}
+        color='darkblue'
       />
-    </View>
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  scrollView: {
     flex: 1,
+    backgroundColor: theme.colors.background,
+  },
+  container: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: theme.colors.background,
+    padding: 20,
   },
   boldText: {
     fontWeight: 'bold',
@@ -86,6 +97,12 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     resizeMode: 'contain',
+  },
+  buttonBox: {
+    marginVertical: 10,
+    padding: 10,
+    borderWidth: 1,
+    backgroundColor: 'crimson',
   },
 });
 

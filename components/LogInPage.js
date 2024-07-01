@@ -12,11 +12,15 @@ function LogInPage({ navigation }) {
   } = useValue();
 
   const [numClubsJoined, setNumClubsJoined] = useState(0);
+  const [isSaved, setIsSaved] = useState(false);
+  
+  const handleSubmit = () => {
+    setIsSaved(true);
+  };
 
   const NumClubsJoinedChange = (text) => {
     setNumClubsJoined(parseInt(text));
   };
-
   const ClubInputChange = (text, index) => {
     const newJoinedClubs = [...joinedClubs];
     newJoinedClubs[index] = text;
@@ -40,9 +44,7 @@ function LogInPage({ navigation }) {
   };
 
   const Submit = () => {
-    console.log('Username:', currentUsername);
-    console.log('Number of clubs joined:', numClubsJoined);
-    console.log('Joined clubs:', joinedClubs);
+    handleSubmit();
   };
 
   return (
@@ -61,11 +63,14 @@ function LogInPage({ navigation }) {
         placeholder="Number of clubs joined:"
       />
       {ClubInputs()}
+      <View style={styles.buttonBox}>
       <Button
         title="Click here"
         onPress={Submit}
-        color={theme.colors.primary}
+        color='darkblue'
       />
+      </View>
+      {isSaved && <Text style={styles.boldText}>Saved!</Text>}
     </View>
   );
 }
@@ -81,8 +86,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 25,
     textAlign: 'center',
-    color: theme.colors.text,
+    color: 'darkblue',
     padding: 5,
+  },
+  buttonBox: {
+    marginVertical: 10,
+    padding: 10,
+    borderWidth: 1,
+    backgroundColor: 'crimson',
   },
 });
 

@@ -1,41 +1,49 @@
-import React, { useState } from 'react';
-import { Text, View, StyleSheet, Button, TextInput, FlatList } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Text, View, StyleSheet, Button, TextInput, FlatList, ScrollView } from 'react-native';
+import RNPickerSelect from 'react-native-picker-select';
 import { useValue } from './ValueContext';
-import clubs from '../assests/clubs.json';
-import theme from './Theme'; 
+import theme from './Theme';
+
+const interestsOptions = [
+    { label: 'Politics', value: 'Politics' },
+    { label: 'Legal Studies', value: 'Legal Studies' },
+    { label: 'Law', value: 'Law' },
+    { label: 'Computer Science', value: 'Computer Science' },
+    { label: 'Robotics', value: 'Robotics' },
+    { label: 'Technology', value: 'Technology' },
+    { label: 'Education', value: 'Education' },
+    { label: 'Activism', value: 'Activism' },
+    { label: 'Sports', value: 'Sports' },
+    { label: 'Dancing', value: 'Dancing' },
+    { label: 'Culture', value: 'Culture' },
+];
 
 function MyFinder() {
-    const { currentUsername, currentMajor, setCurrentUsername, setCurrentMajor } = useValue(); 
+    const { currentUsername, currentMajor, setCurrentUsername, setCurrentMajor, joinedClubs } = useValue();
     const [numInterests, setNumInterests] = useState(0);
     const [interests, setInterests] = useState([]);
     const [submitted, setSubmitted] = useState(false);
     const [matchingClubs, setMatchingClubs] = useState([]);
     const [interestsString, setInterestsString] = useState('');
+    const [clubs, setClubs] = useState([]);
+
+    useEffect(() => {
+        fetch('https://raw.githubusercontent.com/allieladjeva04/COSI-153a/master/clubsList.json')
+            .then(response => response.json())
+            .then(data => setClubs(data))
+            .catch(error => console.error('Error fetching clubs data:', error));
+    }, []);
 
     const NumInterestsChange = (text) => {
-        setNumInterests(parseInt(text));
+        const num = parseInt(text);
+        setNumInterests(num);
+        setInterests(new Array(num).fill(''));
     };
 
-    const InterestsChange = (text, index) => {
+    const InterestsChange = (value, index) => {
         const newInterests = [...interests];
-        newInterests[index] = text;
+        newInterests[index] = value;
         setInterests(newInterests);
-    };
-
-    const InterestsInputs = () => {
-        const interestInputs = [];
-        for (let i = 0; i < numInterests; i++) {
-            interestInputs.push(
-                <TextInput
-                    key={i}
-                    style={styles.boldText}
-                    value={interests[i]}
-                    onChangeText={(text) => InterestsChange(text, i)}
-                    placeholder={'Enter your interest:'}
-                />
-            );
-        }
-        return interestInputs;
     };
 
     const Submit = () => {
@@ -43,16 +51,17 @@ function MyFinder() {
         setInterestsString(interestsJoined);
         console.log('Submitted major:', currentMajor);
         console.log('Submitted interests:', interestsJoined);
-        const filteredClubs = clubs.filter(club =>
-            club["key words"].includes(currentMajor) ||
-            interests.some(interest => club["key words"].includes(interest))
+        const filteredClubs = clubs.filter(club => 
+            (club["keywords"].includes(currentMajor) ||
+            interests.some(interest => club["keywords"].includes(interest))) &&
+            !joinedClubs.includes(club.name) 
         );
         setMatchingClubs(filteredClubs);
         setSubmitted(true);
     };
 
     return (
-        <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.container}>
             <Text style={styles.boldText}>Hi, {currentUsername}</Text>
             <TextInput
                 style={styles.boldText}
@@ -66,8 +75,22 @@ function MyFinder() {
                 keyboardType="numeric"
                 placeholder="Number of interests:"
             />
-            {InterestsInputs()}
-            <Button title="Submit" onPress={Submit} color={theme.colors.primary}/>
+            {numInterests > 0 && (
+                <View>
+                    {interests.map((_, index) => (
+                        <RNPickerSelect
+                            key={index}
+                            onValueChange={(value) => InterestsChange(value, index)}
+                            items={interestsOptions}
+                            style={pickerSelectStyles}
+                            placeholder={{ label: "Select an interest", value: null }}
+                        />
+                    ))}
+                </View>
+            )}
+            <View style={styles.buttonBox}>
+                <Button title="Submit" onPress={Submit} color='darkblue' />
+            </View>
             {submitted && <Text style={styles.boldText}>Your major: {currentMajor}</Text>}
             {submitted && <Text style={styles.boldText}>Your interests are: {interestsString}</Text>}
             {submitted && (
@@ -77,21 +100,24 @@ function MyFinder() {
                         data={matchingClubs}
                         keyExtractor={(item) => item.id.toString()}
                         renderItem={({ item }) => (
-                            <Text style={styles.bulletText}>• {item.name}</Text>
+                            <Text style={styles.bulletText}>• {item.name}: {item.description}</Text>
                         )}
+                        contentContainerStyle={styles.flatListContent}
                     />
                 </View>
             )}
-        </View>
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flexGrow: 1,
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'stretch',
         backgroundColor: theme.colors.background,
+        paddingHorizontal: 20,
+        paddingVertical: 20,
     },
     boldText: {
         fontWeight: 'bold',
@@ -102,8 +128,10 @@ const styles = StyleSheet.create({
     },
     matchingClubsContainer: {
         marginTop: 20,
-        alignSelf: 'stretch',
         paddingHorizontal: 20,
+    },
+    flatListContent: {
+        flexGrow: 1,
     },
     bulletText: {
         fontSize: 23,
@@ -111,6 +139,42 @@ const styles = StyleSheet.create({
         color: theme.colors.text,
         paddingLeft: 10,
         fontStyle: 'italic',
+    },
+    buttonContainer: {
+        width: '50%',
+        alignSelf: 'center',
+        marginVertical: 10,
+    },
+    buttonBox: {
+        marginVertical: 10,
+        padding: 10,
+        borderWidth: 1,
+        backgroundColor: 'crimson',
+      },
+});
+
+const pickerSelectStyles = StyleSheet.create({
+    inputIOS: {
+        fontSize: 16,
+        paddingVertical: 12,
+        paddingHorizontal: 10,
+        borderWidth: 1,
+        borderColor: 'gray',
+        borderRadius: 4,
+        color: 'black',
+        paddingRight: 30,
+        marginVertical: 10,
+    },
+    inputAndroid: {
+        fontSize: 16,
+        paddingVertical: 8,
+        paddingHorizontal: 10,
+        borderWidth: 0.5,
+        borderColor: 'purple',
+        borderRadius: 8,
+        color: 'black',
+        paddingRight: 30,
+        marginVertical: 10,
     },
 });
 

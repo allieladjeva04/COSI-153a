@@ -8,8 +8,8 @@ const theme = {
   ... DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: 'red',
-    accent: 'red',
+    primary: 'crimson',
+    accent: 'crimson',
     background: 'lightblue',
     text: 'darkblue',
   },
