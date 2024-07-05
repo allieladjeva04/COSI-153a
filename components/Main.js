@@ -14,7 +14,7 @@ import ValueProvider from './ValueContext';
 const Tab = createBottomTabNavigator();
 
 const CustomHeader = ({ title }) => {
-  const { colors } = useTheme(); // Use useTheme hook to access colors
+  const { colors } = useTheme(); 
   return (
     <View style={[styles.headerContainer, { backgroundColor: colors.primary }]}>
       <Text style={styles.headerText}>{title}</Text>
