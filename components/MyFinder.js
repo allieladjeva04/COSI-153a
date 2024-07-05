@@ -16,6 +16,7 @@ const interestsOptions = [
     { label: 'Sports', value: 'Sports' },
     { label: 'Dancing', value: 'Dancing' },
     { label: 'Culture', value: 'Culture' },
+    { label: 'Religion', value: 'Religion' },
 ];
 
 function MyFinder() {

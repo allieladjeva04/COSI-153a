@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, Dimensions } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Provider as PaperProvider, useTheme } from 'react-native-paper'; 
-import theme from './Theme'; // Import your custom theme
+import theme from './Theme'; 
 
 import HomeScreen from './HomeScreen';
 import LogInPage from './LogInPage';
@@ -14,7 +14,8 @@ import ValueProvider from './ValueContext';
 const Tab = createBottomTabNavigator();
 
 const CustomHeader = ({ title }) => {
-  const { colors } = useTheme(); // Use useTheme hook to access colors
+  const { colors } = useTheme(); 
+
   return (
     <View style={[styles.headerContainer, { backgroundColor: colors.primary }]}>
       <Text style={styles.headerText}>{title}</Text>
