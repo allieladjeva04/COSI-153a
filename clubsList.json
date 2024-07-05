@@ -59,19 +59,19 @@
         "description": "Brandeis Pole Dance & Fitness club aims to promote both mental and physical health and fitness through careful instruction of techniques in stretching, plyometrics, isometrics, and Aerial Pole Dance.",
         "keywords": ["Sports", "Fitness", "Dancing"]
     },
-     {
+    {
         "id": 11,
         "name": "Brandeis Hillel",
         "description": "At Hillel, students forge new friendships, meet dedicated mentors, celebrate the Jewish calendar, engage in service to others, and find inspiration in Jewish texts and traditions.",
         "keywords": ["Religion"]
     },
-     {
+    {
         "id": 12,
         "name": "Catholic Student Organization",
         "description": "The Catholic Student Organization will: 1) foster spiritual growth as individuals and as a community; 2) provide support, fellowship and recreation; and 3) keep the spirit of our Catholic community alive.",
         "keywords": ["Religion"]
     },
-     {
+    {
         "id": 13,
         "name": "Brandeis Muslim Student Association",
         "description": "The Brandeis Muslim Student Association serves to provide an opportunity for members of the Brandeis community to explore and practice Islam.",
